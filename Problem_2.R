@@ -23,6 +23,7 @@ xmin[xmin > mean(xmin)]
 date <- c("03Mon18", "04Tue18", "05Wed18", "04Thu18", "05Fri18", "06Sat18", "07Sun18")
 date
 
+## Nice
 names(xmin) <- date
 names(xmax) <- date
 
@@ -34,6 +35,16 @@ temperatures <- data.frame(
 
 temperatures
 # h)
+
+## Less verbose and more clear:
+
+temperatures <- within(temperatures, {
+  xminFahrenheit <- xmin * (9/5) + 32
+  xmaxFahrenheit <- xmax * (9/5) + 32
+})
+
+temperaturesFahrenheit <- temeratures[, c('xminFahrenheit', 'xmaxFahrenheit)]
+
 
 Fahrenheit <- xmin #F = 9/5C + 32
 temperatures[, 'df.xminFahrenheit'] <- temperatures[, 'df.xmin'] * Fahrenheit 
@@ -51,7 +62,13 @@ measurementsInFahrenheit
 
 # j)
 
+
 measurementsInFahrenheit[c(1, 2, 3, 4, 5), ]
+
+## or easier: 1:5 == c(1, 2, 3, 4, 5)
+
+## Exclusion
+measurementsInFahrenheit[-(6:7), ]
 
 
 
